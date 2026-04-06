@@ -171,5 +171,5 @@ int sqlite3_invoke_busy_handler_go(sqlite3_int64 token) {
   return ((int (*)(void*))(ap[0]))(ap[1]);
 }
 
-static_assert(offsetof(sqlite3_vfs, zName) == 16, "Unexpected offset");
-static_assert(offsetof(struct go_file, handle) == 4, "Unexpected offset");
+static_assert(offsetof(sqlite3_vfs, zName) == 24, "Unexpected offset");
+static_assert(offsetof(struct go_file, handle) == 8, "Unexpected offset");

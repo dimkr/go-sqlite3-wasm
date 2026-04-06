@@ -233,11 +233,11 @@ int sqlite3_vtab_config_go(sqlite3* db, int op, int constraint) {
   return sqlite3_vtab_config(db, op, constraint);
 }
 
-static_assert(offsetof(struct sqlite3_vtab, zErrMsg) == 8, "Unexpected offset");
-static_assert(offsetof(struct go_module, base) == 4, "Unexpected offset");
-static_assert(offsetof(struct go_vtab, base) == 4, "Unexpected offset");
-static_assert(offsetof(struct go_cursor, base) == 4, "Unexpected offset");
-static_assert(sizeof(struct sqlite3_index_info) == 72, "Unexpected size");
+static_assert(offsetof(struct sqlite3_vtab, zErrMsg) == 16, "Unexpected offset");
+static_assert(offsetof(struct go_module, base) == 8, "Unexpected offset");
+static_assert(offsetof(struct go_vtab, base) == 8, "Unexpected offset");
+static_assert(offsetof(struct go_cursor, base) == 8, "Unexpected offset");
+static_assert(sizeof(struct sqlite3_index_info) == 96, "Unexpected size");
 static_assert(sizeof(struct sqlite3_index_orderby) == 8, "Unexpected size");
 static_assert(sizeof(struct sqlite3_index_constraint) == 12, "Unexpected size");
 static_assert(sizeof(struct sqlite3_index_constraint_usage) == 8,

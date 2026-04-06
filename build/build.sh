@@ -8,7 +8,7 @@ WASI_SDK="tools/wasi-sdk/bin/"
 
 trap 'rm -f sqlite3.tmp sqlite3.wasm' EXIT
 
-"$WASI_SDK/clang" --target=wasm32 -nostdlib -std=c23 -g0 -Oz \
+"$WASI_SDK/clang" --target=wasm64-unknown-unknown -nostdlib -std=c23 -g0 -Oz \
 	-Wall -Wextra -Wno-unused-parameter -Wno-unused-function \
 	-o sqlite3.wasm main.c test_*.c -Ilibc -I. \
 	-mexec-model=reactor \

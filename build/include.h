@@ -9,4 +9,4 @@
 
 typedef void* go_handle;
 void go_destroy(go_handle);
-static_assert(sizeof(go_handle) == 4, "Unexpected size");
+static_assert(sizeof(go_handle) == 8, "Unexpected size");
