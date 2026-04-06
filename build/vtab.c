@@ -233,6 +233,7 @@ int sqlite3_vtab_config_go(sqlite3* db, int op, int constraint) {
   return sqlite3_vtab_config(db, op, constraint);
 }
 
+#ifdef __wasm64__
 static_assert(offsetof(struct sqlite3_vtab, zErrMsg) == 16, "Unexpected offset");
 static_assert(offsetof(struct go_module, base) == 8, "Unexpected offset");
 static_assert(offsetof(struct go_vtab, base) == 8, "Unexpected offset");
@@ -253,3 +254,25 @@ static_assert(sizeof(struct sqlite3_index_orderby) == 8, "Unexpected size");
 static_assert(sizeof(struct sqlite3_index_constraint) == 12, "Unexpected size");
 static_assert(sizeof(struct sqlite3_index_constraint_usage) == 8,
               "Unexpected size");
+#else
+static_assert(offsetof(struct sqlite3_vtab, zErrMsg) == 8, "Unexpected offset");
+static_assert(offsetof(struct go_module, base) == 4, "Unexpected offset");
+static_assert(offsetof(struct go_vtab, base) == 4, "Unexpected offset");
+static_assert(offsetof(struct go_cursor, base) == 4, "Unexpected offset");
+static_assert(sizeof(struct sqlite3_index_info) == 72, "Unexpected size");
+static_assert(offsetof(struct sqlite3_index_info, aConstraint) == 4, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, nOrderBy) == 8, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, aOrderBy) == 12, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, aConstraintUsage) == 16, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, idxNum) == 20, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, idxStr) == 24, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, needToFreeIdxStr) == 28, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, orderByConsumed) == 32, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, estimatedCost) == 40, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, estimatedRows) == 48, "Unexpected offset");
+static_assert(offsetof(struct sqlite3_index_info, colUsed) == 64, "Unexpected offset");
+static_assert(sizeof(struct sqlite3_index_orderby) == 8, "Unexpected size");
+static_assert(sizeof(struct sqlite3_index_constraint) == 12, "Unexpected size");
+static_assert(sizeof(struct sqlite3_index_constraint_usage) == 8,
+              "Unexpected size");
+#endif

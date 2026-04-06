@@ -9,4 +9,8 @@
 
 typedef void* go_handle;
 void go_destroy(go_handle);
+#ifdef __wasm64__
 static_assert(sizeof(go_handle) == 8, "Unexpected size");
+#else
+static_assert(sizeof(go_handle) == 4, "Unexpected size");
+#endif

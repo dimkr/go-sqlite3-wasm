@@ -54,5 +54,10 @@ int sqlite3_columns_go(sqlite3_stmt* stmt, int nCol, char* aType,
 static_assert(offsetof(union sqlite3_data, i) == 0, "Unexpected offset");
 static_assert(offsetof(union sqlite3_data, d) == 0, "Unexpected offset");
 static_assert(offsetof(union sqlite3_data, ptr) == 0, "Unexpected offset");
+#ifdef __wasm64__
 static_assert(offsetof(union sqlite3_data, len) == 8, "Unexpected offset");
 static_assert(sizeof(union sqlite3_data) == 16, "Unexpected size");
+#else
+static_assert(offsetof(union sqlite3_data, len) == 4, "Unexpected offset");
+static_assert(sizeof(union sqlite3_data) == 8, "Unexpected size");
+#endif
